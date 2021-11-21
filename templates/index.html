@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xml:lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartMirror</title>
+    <link href="../static/css/style.css" rel="stylesheet">
+    <script src="../static/js/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"/>
+
+    <!--Atualiza data e hora-->
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script type="text/javascript">
+        jQuery(window).load(function ($) {
+            atualizaRelogio();
+            atualizaFoto();
+            weather.fetchWeather("Serra");
+
+        });
+
+
+    </script>
+
+</head>
+<body id="tela">
+<div id="slider">
+    <img class="selected" id="foto1" src="" alt="imgCarrosel">
+    <img id="foto2" src="" alt="imgCarrosel">
+    <img id="foto3" src="" alt="imgCarrosel">
+    <img id="foto4" src="" alt="imgCarrosel">
+</div>
+
+<div class="weather">
+    <div class="case">
+        <div class="flex">
+            <img class="icon" src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon"/>
+            <div class="temp">51°C</div>
+        </div>
+    </div>
+    <div class="case">
+        <div id="data"></div>
+        <div style="display:flex;align-items: baseline;">
+            <div id="hora"></div>
+            <div id="segundos"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!--script para hora e data-->
+
+<script>
+
+    function atualizaRelogio() {
+        const months = [
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
+        ];
+        var momentoAtual = new Date();
+
+        var vhora = momentoAtual.getHours();
+        var vminuto = momentoAtual.getMinutes();
+        var vsegundo = momentoAtual.getSeconds();
+
+        var vdia = momentoAtual.getDate();
+        var vmes = momentoAtual.getMonth();
+        var vano = momentoAtual.getFullYear();
+
+        vmes = months[vmes];
+
+        if (vdia < 10) {
+            vdia = "0" + vdia;
+        }
+        if (vmes < 10) {
+            vmes = "0" + vmes;
+        }
+        if (vhora < 10) {
+            vhora = "0" + vhora;
+        }
+        if (vminuto < 10) {
+            vminuto = "0" + vminuto;
+        }
+        if (vsegundo < 10) {
+            vsegundo = "0" + vsegundo;
+        }
+
+        dataFormat = vdia + " " + vmes + " " + vano;
+        horaFormat = vhora + ":" + vminuto;
+        segundosFormat = ":" + vsegundo;
+
+        document.getElementById("data").innerHTML = dataFormat;
+        document.getElementById("hora").innerHTML = horaFormat;
+        document.getElementById("segundos").innerHTML = segundosFormat;
+
+        setTimeout("atualizaRelogio()", 1000);
+    }
+
+    let time = 4000;
+
+    function atualizaFoto() {
+        id = Math.random();
+        link = 'https://picsum.photos/seed/' + id + '/600/300';
+        document.getElementById('foto1').src = link;
+        document.getElementById('foto2').src = link;
+        document.getElementById('foto3').src = link;
+        document.getElementById('foto4').src = link;
+
+        setTimeout("atualizaFoto()", time);
+    }
+
+
+    currentImageIndex = 0,
+        images = document.querySelectorAll("#slider img")
+    max = images.length;
+
+    function nextImage() {
+        images[currentImageIndex].classList.remove("selected")
+
+        currentImageIndex++
+
+        if (currentImageIndex >= max)
+            currentImageIndex = 0
+
+        images[currentImageIndex].classList.add("selected")
+    }
+
+    function start() {
+        setInterval(() => {
+            //troca de imagem
+            nextImage();
+        }, time)
+
+        setInterval(() => {
+            isOnline();
+
+            function getRandomString() {
+                return Math.random().toString(36).substring(2, 15)
+            }
+
+            async function isOnline() {
+                if (!window.navigator.onLine) return false
+
+                // avoid CORS errors with a request to your own origin
+                const url = new URL("https://picsum.photos/seed/0.7792404176005108/600/300")
+
+                // random value to prevent cached responses
+                url.searchParams.set('rand', getRandomString())
+
+                try {
+                    const response = await fetch(
+                        url.toString(),
+                        {method: 'HEAD'},
+                    )
+                    console.log("online");
+                    return response.ok
+                } catch {
+                    window.open('{{ url_for('offNetwork') }}', "_self");
+                    console.log("offline");
+                    return false
+                }
+            }
+        }, 4000)
+
+
+    }
+
+
+    window.addEventListener("load", start)
+
+
+</script>
+
+
+</html>

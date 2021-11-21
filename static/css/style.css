@@ -1,0 +1,113 @@
+@import url('http://fonts.cdnfonts.com/css/aldo-the-apache');
+
+body {
+    overflow: hidden;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Arial', sans-serif;
+
+}
+
+#slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(21, 21, 21, 0.09);
+    width: 700px;
+    height: 400px;
+    margin-top: 1%;
+    margin-bottom: 5%;
+
+    position: relative;
+}
+
+#slider img {
+    opacity: 0;
+
+    position: absolute;
+
+    width: 600px;
+    height: 300px;
+    border-radius: 10px 70px;
+
+    object-fit: cover;
+
+    transition: opacity 1000ms;
+}
+
+#slider img.selected {
+    opacity: 90%;
+}
+
+#data {
+    font-size: 20px;
+    margin-right: -60px;
+}
+
+#hora {
+    font-size: 80px;
+    margin-bottom: -12px;
+}
+
+#segundos {
+    font-size: 20px;
+}
+
+.case {
+    background-color: rgba(21, 21, 21, 0.09);
+    width: 400px;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#foto {
+    border-radius: 10px;
+}
+
+
+.city {
+    font-size: 32px;
+}
+
+.date {
+    font-size: 16px;
+}
+
+.temp {
+    font-size: 25px;
+}
+
+.weather {
+    width: 800px;
+    height: 115px;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.low-high {
+    font-size: 18px;
+}
+
+.flex {
+    display: flex;
+    align-items: baseline;
+}
+
+.icon {
+    width: 100px;
+}
+
+#frame {
+    width: 500px;
+    height: 500px;
+}

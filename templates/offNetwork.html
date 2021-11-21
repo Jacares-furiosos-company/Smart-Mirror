@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sem Conexão</title>
+
+    <script>
+        setTimeout(myURL, 5000);
+
+        function myURL() {
+            window.open('{{ url_for('offNetwork') }}', "_self");
+        }
+    </script>
+
+</head>
+<body style="background: black;padding-top: 80%;overflow:hidden;">
+
+<div style="display: flex;justify-content: center;align-items: center;">
+
+    <img style="width: 100px; height: 100px;" src="../static/icons/offnet.png">
+    <div style="color: white;font-size: 75px;font-family: Arial;">Sem Conexão</div>
+
+</div>
+
+</body>
+</html>
