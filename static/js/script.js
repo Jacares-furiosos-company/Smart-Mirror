@@ -24,6 +24,3 @@ let weather = {
         setTimeout("weather.fetchWeather('Serra');", 60000);
     }
 };
-
-
-
