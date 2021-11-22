@@ -1,4 +1,5 @@
 import screen_brightness_control as sbc
+import distance as dis
 import time
 
 while True:
