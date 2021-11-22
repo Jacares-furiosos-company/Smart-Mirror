@@ -5,8 +5,8 @@ import time
 def verificaDistancia():
     try:
         GPIO.setmode(GPIO.BOARD)
-        pinTrigger = 7
-        pinEcho = 11
+        pinTrigger = 18
+        pinEcho = 16
 
         GPIO.setup(pinTrigger, GPIO.OUT)
         GPIO.setup(pinEcho, GPIO.IN)
@@ -14,7 +14,6 @@ def verificaDistancia():
         GPIO.output(pinTrigger, GPIO.LOW)
         GPIO.output(pinTrigger, GPIO.HIGH)
 
-        time.sleep(0.00001)
         GPIO.output(pinTrigger, GPIO.LOW)
 
         while GPIO.input(pinEcho) == 0:
