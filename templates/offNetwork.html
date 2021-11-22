@@ -5,11 +5,41 @@
     <title>Sem Conexão</title>
 
     <script>
-        setTimeout(myURL, 5000);
+        function start() {
+            setInterval(() => {
+                //verificar conexão da internet
+                isOnline();
 
-        function myURL() {
-            window.open('{{ url_for('offNetwork') }}', "_self");
+                function getRandomString() {
+                    return Math.random().toString(36).substring(2, 15)
+                }
+
+                async function isOnline() {
+                    if (!window.navigator.onLine) return false
+
+                    // avoid CORS errors with a request to your own origin
+                    const url = new URL("https://picsum.photos/seed/0.7792404176005108/600/300")
+
+                    // random value to prevent cached responses
+                    url.searchParams.set('rand', getRandomString())
+
+                    try {
+                        const response = await fetch(
+                            url.toString(),
+                            {method: 'HEAD'},
+                        )
+                        console.log("online");
+                        window.open('{{ url_for('index') }}', "_self");
+                        return false
+                    } catch {
+                        console.log("offline");
+                        return response.ok
+                    }
+                }
+            }, 3000)
         }
+
+        window.addEventListener("load", start)
     </script>
 
 </head>

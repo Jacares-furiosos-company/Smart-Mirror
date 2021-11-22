@@ -137,12 +137,15 @@
     }
 
     function start() {
+
+
         setInterval(() => {
             //troca de imagem
             nextImage();
         }, time)
 
         setInterval(() => {
+            //verificar conexão da internet
             isOnline();
 
             function getRandomString() {
@@ -171,7 +174,7 @@
                     return false
                 }
             }
-        }, 4000)
+        }, 3000)
 
 
     }
