@@ -1,9 +1,9 @@
 import screen_brightness_control as sbc
-import distance as dis
+#import distance as dis
 import time
 
 while True:
-    distanciaEncontrada = dis.verificaDistancia()
+    distanciaEncontrada = 40 #dis.verificaDistancia()
 
     if (distanciaEncontrada <= 40):
         sbc.set_brightness(100)
