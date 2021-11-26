@@ -20,7 +20,7 @@ let weather = {
         const {icon} = data.weather[0];
         const {temp} = data.main;
         document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
-        document.querySelector(".temp").innerText = temp + "°C";
+        document.querySelector(".tempp").innerText = temp + "°C";
         setTimeout("weather.fetchWeather('Serra');", 60000);
     }
 };

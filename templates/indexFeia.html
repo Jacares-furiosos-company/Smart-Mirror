@@ -15,22 +15,69 @@
         jQuery(window).load(function ($) {
             atualizaRelogio();
             weather.fetchWeather("Serra");
-
         });
 
 
     </script>
+    <style>
+        #data {
+            font-size: 20px;
+            margin-right: -60px;
+            margin-bottom: 28px;
+        }
+
+        #hora {
+            font-size: 80px;
+            margin-bottom: -12px;
+        }
+
+        #segundos {
+            font-size: 20px;
+        }
+
+        .case {
+            background-color: rgba(21, 21, 21, 0.09);
+            width: 400px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .tempp {
+            font-size: 40px;
+        }
+
+        .weather {
+            width: 800px;
+            height: 115px;
+            font-size: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .icon {
+            width: 100px;
+        }
+    </style>
 
 </head>
 <body id="tela">
 
 <div>
-    <div style="position: absolute;margin-left: -181px;width: 100%;">
+    <div style="position: absolute;margin-left: -88px;width: 79%;">
         <img src="../static/icons/moldura.png" style="margin-left: -26px;width: 100%;">
     </div>
-    <div style="margin: 0;width: 100%;">
+    <div style="margin: 0;width: 88%;">
         <img src="../static/icons/espelho.png"
-             style="margin-top: 343px; width: 115%;margin-left: -22px;margin-bottom: 276px;">
+             style="margin-top: 267px; width: 96%;margin-left: 25px;margin-bottom: 115px;">
     </div>
 </div>
 
@@ -38,7 +85,7 @@
     <div class="case">
         <div class="flex">
             <img class="icon" src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon"/>
-            <div class="temp">51°C</div>
+            <div class="tempp">51°C</div>
         </div>
     </div>
     <div class="case">
