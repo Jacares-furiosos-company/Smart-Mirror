@@ -36,3 +36,4 @@ while True:
         pass
     finally:
         GPIO.cleanup()
+        time.sleep(3)
