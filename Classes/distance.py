@@ -26,11 +26,13 @@ while True:
 
         print("Distance: %.2f cm" % (distance))
 
-        if distance <= 40:
-            # os.system("vcgencmd display_power 0")
-            print("menor que 40")
-        elif distance > 40:
-            print("maior que 40")
-            # os.system("vcgencmd display_power 1")
+        if distance <= 50:
+            #os.system("vcgencmd display_power 1")
+            print("menor que 50")
+        elif distance > 50:
+            print("maior que 50")
+            #os.system("vcgencmd display_power 0")
+    except:
+        pass
     finally:
         GPIO.cleanup()
