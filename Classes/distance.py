@@ -1,5 +1,5 @@
-import subprocess
 import RPi.GPIO as GPIO
+import os
 import time
 
 while True:
@@ -26,10 +26,10 @@ while True:
 
         print("Distance: %.2f cm" % (distance))
 
-        if (distance <= 40):
-            subprocess.run(['vcgencmd display_power 1'])
-        elif (distance > 40):
-            subprocess.run(['vcgencmd display_power 0'])
+        if distance <= 40:
+            os.system("vcgencmd display_power 0")
+        elif distance > 40:
+            os.system("vcgencmd display_power 1")
 
     finally:
         GPIO.cleanup()
