@@ -1,42 +1,34 @@
 import RPi.GPIO as GPIO
-import os
 import time
+try:
+    GPIO.setmode(GPIO.BOARD)
+    pinTrigger = 18
+    pinEcho = 16
 
-while True:
-    try:
-        GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(pinTrigger, GPIO.OUT)
+    GPIO.setup(pinEcho, GPIO.IN)
 
-        PIN_TRIGGER = 18
-        PIN_ECHO = 16
+    GPIO.output(pinTrigger, GPIO.LOW)
+    GPIO.output(pinTrigger, GPIO.HIGH)
 
-        GPIO.setup(PIN_TRIGGER, GPIO.OUT)
-        GPIO.setup(PIN_ECHO, GPIO.IN)
+    time.sleep(0.00001)
+    GPIO.output(pinTrigger, GPIO.LOW)
 
-        GPIO.output(PIN_TRIGGER, GPIO.LOW)
+    while GPIO.input(pinEcho)==0:
+        pulseStartTime = time.time()
+    while GPIO.input(pinEcho)==1:
+        pulseEndTime = time.time()
 
-        time.sleep(2)
+    pulseDuration = pulseEndTime - pulseStartTime
+    distance = round(pulseDuration * 17150, 2)
 
-        GPIO.output(PIN_TRIGGER, GPIO.HIGH)
+    print("Distance: %.2f cm" % (distance))
 
-        time.sleep(0.00001)
-
-        GPIO.output(PIN_TRIGGER, GPIO.LOW)
-
-        while GPIO.input(PIN_ECHO) == 0:
-            pulse_start_time = time.time()
-        while GPIO.input(PIN_ECHO) == 1:
-            pulse_end_time = time.time()
-
-        pulse_duration = pulse_end_time - pulse_start_time
-        distance = round(pulse_duration * 17150, 2)
-        print(distance)
-
-        if distance <= 40:
-            #os.system("vcgencmd display_power 0")
-            print("menor que 40")
-        elif distance > 40:
-            print("maior que 40")
-            #os.system("vcgencmd display_power 1")
-
-    finally:
-        GPIO.cleanup()
+    if distance <= 40:
+        # os.system("vcgencmd display_power 0")
+        print("menor que 40")
+    elif distance > 40:
+        print("maior que 40")
+        # os.system("vcgencmd display_power 1")
+finally:
+    GPIO.cleanup()
