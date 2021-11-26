@@ -27,11 +27,11 @@ while True:
         print("Distance: %.2f cm" % (distance))
 
         if distance <= 50:
-            #os.system("vcgencmd display_power 1")
+            os.system("vcgencmd display_power 1")
             print("menor que 50")
         elif distance > 50:
             print("maior que 50")
-            #os.system("vcgencmd display_power 0")
+            os.system("vcgencmd display_power 0")
     except:
         pass
     finally:
